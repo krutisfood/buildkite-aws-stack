@@ -1,0 +1,33 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "ap-southeast-2",
+      "source_ami": "ami-c11856fb",
+      "instance_type": "m3.medium",
+      "ssh_username": "buildkite-user",
+      "ami_name": "buildkite-{{isotime | clean_ami_name}}",
+      "ami_description": "A docker host image based on Amazon Linux",
+      "ami_groups": ["all"],
+      "tags": {
+        "Docker": "1.8.0",
+        "Docker-Compose": "1.4.2"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "conf",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/amazon_linux/install-cfn-tools.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/amazon_linux/install-docker.sh"
+    }
+  ]
+}
