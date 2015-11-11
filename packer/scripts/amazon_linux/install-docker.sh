@@ -3,7 +3,7 @@
 # Install Docker daemon.
 sudo yum install -y docker
 sudo service docker start
-sudo usermod -a -G docker buildkite-user
+sudo usermod -a -G docker ec2-user
 
 # installs docker-compose
 sudo curl -o /usr/local/bin/docker-compose -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-Linux-x86_64
